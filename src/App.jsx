@@ -1,41 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import { Button } from 'antd'
-import Login from './views/Components/Login'
-import ToDoList from './views/ToDoList'
+import Login from './Components/Login'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Navbar from './Components/Navbar'
+import { AuthProvider } from './hooks/useAuth'
+import { ProtectedRoute } from './Components/ProtectedRoute'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <Button>
-        <div onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </div>
-      </Button>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <Login />
-      <ToDoList />
-    </>
+    <div>
+        <BrowserRouter>
+          <AuthProvider>
+            <Routes>
+              <Route
+                path='/login'
+                element={<Login mail={"yahir.ponce@softtek.com"}></Login>}
+              >
+              </Route>
+              <Route
+                path='/navbar'
+                element={
+                  <ProtectedRoute>
+                    <Navbar></Navbar>
+                  </ProtectedRoute>
+                }
+              >
+              </Route>
+            </Routes>
+          </AuthProvider>
+        </BrowserRouter>
+     
+    </div>
   )
 }
 

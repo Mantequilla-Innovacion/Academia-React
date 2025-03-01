@@ -1,10 +1,14 @@
 import { Button, Col, Input, Row } from 'antd';
 import React, { useState } from 'react'
-import { signinUser } from './confing/authCall';
+import { signinUser } from '../confing/authCall';
+import { useAuth } from '../hooks/useAuth';
 
-export default function Login() {
-    const [userName, setUserName] = useState("");
+
+export default function Login({mail}) {
+    const {user} = useAuth();
+    const [userName, setUserName] = useState(mail);
     const [password, setPassword] = useState("");
+    
 
     const changeName=(inputvalue)=>{
         setUserName(inputvalue.target.value);
@@ -20,6 +24,7 @@ export default function Login() {
 
   return (
     <div>
+        <>{JSON.stringify(user)}</>
         <Row>
             <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                 <Input 
