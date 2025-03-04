@@ -1,14 +1,21 @@
 import { Button, Col, Input, Row } from 'antd';
-import React, { useState } from 'react'
+import React, { use, useState } from 'react'
+import { useEffect } from 'react';
 import { signinUser } from '../confing/authCall';
 import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Login({mail}) {
     const {user} = useAuth();
     const [userName, setUserName] = useState(mail);
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
     
+    useEffect(() => {
+      if (user) navigate('/navbar');  
+    }, [user]);
+      
 
     const changeName=(inputvalue)=>{
         setUserName(inputvalue.target.value);
