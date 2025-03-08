@@ -1,27 +1,49 @@
-import React, { useEffect, useState } from 'react'
-import { useAuth } from '../hooks/useAuth'
-import { LogoutOutlined } from '@ant-design/icons'
-import { readData } from '../confing/realtimeCalls';
+import { useState } from 'react';
+import { Layout, Menu, Button } from 'antd';
+import { LogoutOutlined, MenuOutlined, UserOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
-export default function Navbar() {
-    const {logout , user} = useAuth();
-    const [localUser, setLocalUser] = useState(null);
+const { Header } = Layout;
 
-    useEffect(() => {
-      readUser();
-    }, [user]);
+export default function Navbar({ localUser }) {
+  const navigate = useNavigate();
 
-    const readUser = async () => {
-      const luser = await readData('users', 'email', user.email);
-      if(luser.val()) {
-        setLocalUser(luser.val()[Object.keys(luser.val())[0]]);
-      }
-    };
-
+  const { logout } = useAuth();
   return (
-    <div style={{ textAlign: "right"}}>
-      {localUser&&<>{localUser.name}</>}
-      <LogoutOutlined onClick={logout}/>   
-    </div>
-  )
+    <Header
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        background: '#001529',
+        padding: '0 20px 0 50px',
+      }}
+    >
+      <div style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>
+        LoremIpsum
+      </div>
+      <Menu
+        theme='dark'
+        mode='horizontal'
+        style={{ flex: 1, minWidth: 0 }}
+        selectedKeys={[]}
+      >
+        <Menu.Item key='1'>
+          <Button theme='dark' onClick={() => navigate('/home')}>
+            Home Page
+          </Button>
+        </Menu.Item>
+        <Menu.Item key='2'>
+          <Button onClick={() => navigate('/switches')}>Home Page</Button>
+        </Menu.Item>
+        <Menu.Item key='3'>
+          <Button onClick={() => navigate('/Home')}>Home Page</Button>
+        </Menu.Item>
+      </Menu>
+
+      <Button type='primary' icon={<LogoutOutlined />} onClick={logout}>
+        <p>{localUser.name}</p>
+      </Button>
+    </Header>
+  );
 }

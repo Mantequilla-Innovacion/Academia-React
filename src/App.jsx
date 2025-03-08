@@ -1,9 +1,11 @@
 import './App.css'
 import Login from './Components/Login'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Navbar from './Components/Navbar'
+import Home from './Components/HomePage'
 import { AuthProvider } from './hooks/useAuth'
 import { ProtectedRoute } from './Components/ProtectedRoute'
+import Signup from './Components/Signup'
+import Switches from './Components/Switches'
 
 function App() {
   return (
@@ -13,14 +15,28 @@ function App() {
             <Routes>
               <Route
                 path='/login'
-                element={<Login mail={"yahir.ponce@softtek.com"}></Login>}
+                element={<Login/>}
               >
               </Route>
               <Route
-                path='/navbar'
+                path='/signup'
+                element={<Signup />}
+              >
+              </Route>
+              <Route
+                path='/home'
                 element={
                   <ProtectedRoute>
-                    <Navbar></Navbar>
+                    <Home/>
+                  </ProtectedRoute>
+                }
+              >
+              </Route>
+              <Route
+                path='/switches'
+                element={
+                  <ProtectedRoute>
+                    <Switches/>
                   </ProtectedRoute>
                 }
               >

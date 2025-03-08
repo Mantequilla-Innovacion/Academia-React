@@ -1,59 +1,68 @@
-import { Button, Col, Input, Row } from 'antd';
-import React, { use, useState } from 'react'
-import { useEffect } from 'react';
-import { signinUser } from '../confing/authCall';
-import { useAuth } from '../hooks/useAuth';
+import React, { useEffect, useState } from 'react';
+import { Form, Input, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
+import { signinUser } from '../confing/authCall';
 
+export default function Login() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
-export default function Login({mail}) {
-    const {user} = useAuth();
-    const [userName, setUserName] = useState(mail);
-    const [password, setPassword] = useState("");
-    const navigate = useNavigate();
-    
-    useEffect(() => {
-      if (user) navigate('/navbar');  
-    }, [user]);
-      
+  useEffect(() => {
+    if (user) navigate('/home');
+  }, [user, navigate]);
 
-    const changeName=(inputvalue)=>{
-        setUserName(inputvalue.target.value);
+  const onFinish = async (values) => {
+    try {
+      const response = await signinUser(values.mail, values.password);
+      if (response.error) {
+        alert(
+          'Titulo, persona designada y fecha de finalización son obligatorios'
+        );
+        return;
+      }
+    } catch (error) {
+      console.error('Login error:', error);
     }
-
-    const changePassword=(inputvalue)=>{
-        setPassword(inputvalue.target.value);
-    }
-
-    const login=()=>{
-        signinUser(userName, password);
-    }
+  };
 
   return (
-    <div>
-        <>{JSON.stringify(user)}</>
-        <Row>
-            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                <Input 
-                    size="small" 
-                    placeholder='Correo del usuario' 
-                    value={userName}
-                    onChange={changeName}
-                >
-                </Input>
-            </Col>
-            <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-                <Input.Password
-                    size="small" 
-                    placeholder='Correo del usuario' 
-                    value={password}
-                    onChange={changePassword}
-                >
-                </Input.Password>
-            </Col>
-        </Row>
+    <Form
+      name='login_form'
+      onFinish={onFinish}
+      style={{ maxWidth: 300, margin: 'auto' }}
+    >
+      <h2>Login</h2>
 
-    <Button onClick={login}>Login</Button>
-    </div>
-  )
+      <Form.Item
+        label='Email'
+        name='mail'
+        rules={[{ required: true, message: 'Please enter your username!' }]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        label='Password'
+        name='password'
+        rules={[{ required: true, message: 'Please enter your password!' }]}
+      >
+        <Input.Password />
+      </Form.Item>
+
+      <Form.Item>
+        <Button type='primary' htmlType='submit' block>
+          Submit
+        </Button>
+      </Form.Item>
+
+      <hr></hr>
+
+      <Form.Item>
+        <Button type='link' onClick={() => navigate('/signup')}>
+          Signup
+        </Button>
+      </Form.Item>
+    </Form>
+  );
 }
