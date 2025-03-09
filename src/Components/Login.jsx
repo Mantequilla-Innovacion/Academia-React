@@ -9,7 +9,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) navigate('/home');
+    if (user) navigate('/');
   }, [user, navigate]);
 
   const onFinish = async (values) => {
@@ -17,7 +17,7 @@ export default function Login() {
       const response = await signinUser(values.mail, values.password);
       if (response.error) {
         alert(
-          'Titulo, persona designada y fecha de finalización son obligatorios'
+          'Email and password are required'
         );
         return;
       }
