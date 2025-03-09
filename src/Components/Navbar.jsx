@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Layout, Menu, Button } from 'antd';
-import { LogoutOutlined, MenuOutlined, UserOutlined } from '@ant-design/icons';
+import { HomeOutlined, LogoutOutlined, MenuOutlined, UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
@@ -20,7 +20,7 @@ export default function Navbar({ localUser }) {
       }}
     >
       <div style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>
-        LoremIpsum
+        TAREAS
       </div>
       <Menu
         theme='dark'
@@ -29,19 +29,18 @@ export default function Navbar({ localUser }) {
         selectedKeys={[]}
       >
         <Menu.Item key='1'>
-          <Button theme='dark' onClick={() => navigate('/home')}>
-            Home Page
+          <Button theme='dark' onClick={() => navigate('/')}>
+          <HomeOutlined /> Home Page
           </Button>
-        </Menu.Item>
-        <Menu.Item key='2'>
-          <Button onClick={() => navigate('/switches')}>Home Page</Button>
-        </Menu.Item>
-        <Menu.Item key='3'>
-          <Button onClick={() => navigate('/Home')}>Home Page</Button>
         </Menu.Item>
       </Menu>
 
-      <Button type='primary' icon={<LogoutOutlined />} onClick={logout}>
+      <Button type='primary' style={{color:'red', background:'white', borderColor:'#E5B4B4',
+        borderBlockStyle:'solid'
+      }}
+      
+      icon={<LogoutOutlined />} onClick={logout}
+      >
         <p>{localUser.name}</p>
       </Button>
     </Header>

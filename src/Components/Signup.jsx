@@ -10,7 +10,7 @@ export default function Signup() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) navigate('/home');
+    if (user) navigate('/');
   }, [user]);
 
   const onFinish = async (values) => {
