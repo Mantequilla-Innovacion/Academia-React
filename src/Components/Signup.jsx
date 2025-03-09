@@ -37,13 +37,13 @@ export default function Signup() {
   };
 
   return (
-    <div>
+    <div style={{backgroundColor: "white", minHeight: "100vh", padding: "20px"}}>
       <Form
         name='login_form'
         onFinish={onFinish}
         style={{ maxWidth: 300, margin: 'auto' }}
       >
-        <h2>Login</h2>
+        <h2 style={{color:"black"}}>Signup</h2>
 
         <Form.Item
           label='Email'
@@ -70,7 +70,7 @@ export default function Signup() {
         </Form.Item>
 
         <Form.Item>
-          <Button type='primary' htmlType='submit' block>
+          <Button type='primary' htmlType='submit' block color='green' variant='solid'>
             Submit
           </Button>
         </Form.Item>
@@ -79,7 +79,7 @@ export default function Signup() {
 
         <Form.Item>
           <Button type='link' onClick={() => navigate('/login')}>
-            Signup
+            Login
           </Button>
         </Form.Item>
       </Form>

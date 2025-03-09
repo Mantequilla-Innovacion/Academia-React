@@ -27,42 +27,45 @@ export default function Login() {
   };
 
   return (
-    <Form
-      name='login_form'
-      onFinish={onFinish}
-      style={{ maxWidth: 300, margin: 'auto' }}
-    >
-      <h2>Login</h2>
-
-      <Form.Item
-        label='Email'
-        name='mail'
-        rules={[{ required: true, message: 'Please enter your username!' }]}
+    <div style={{ backgroundColor: "white", minHeight: "100vh", display: "flex", justifyContent: "center", padding:"35px" }}>
+      <Form
+        name="login_form"
+        onFinish={onFinish}
+        style={{ maxWidth: 300, borderRadius: "8px" }}
       >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        label='Password'
-        name='password'
-        rules={[{ required: true, message: 'Please enter your password!' }]}
-      >
-        <Input.Password />
-      </Form.Item>
-
-      <Form.Item>
-        <Button type='primary' htmlType='submit' block>
-          Submit
-        </Button>
-      </Form.Item>
-
-      <hr></hr>
-
-      <Form.Item>
-        <Button type='link' onClick={() => navigate('/signup')}>
-          Signup
-        </Button>
-      </Form.Item>
-    </Form>
+        <h2 style={{ color: "black" }}>Login</h2>
+  
+        <Form.Item
+          label="Email"
+          name="mail"
+          rules={[{ required: true, message: "Please enter your username!" }]}
+        >
+          <Input />
+        </Form.Item>
+  
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[{ required: true, message: "Please enter your password!" }]}
+        >
+          <Input.Password />
+        </Form.Item>
+  
+        <Form.Item>
+          <Button type="primary" htmlType="submit" block color='green' variant='solid'>
+            Submit
+          </Button>
+        </Form.Item>
+  
+        <hr />
+  
+        <Form.Item>
+          <Button type="link" onClick={() => navigate("/signup")}>
+            Signup
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
+  
 }
