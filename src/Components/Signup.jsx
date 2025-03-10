@@ -24,7 +24,7 @@ export default function Signup() {
       if (user) {
         await writeData(
           `users/`,
-          { email, name, persmissions: 'read' },
+          { email, name, permissions: 'read' },
           'admin'
         );
         console.log('User created:', user);
