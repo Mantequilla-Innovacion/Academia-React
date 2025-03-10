@@ -57,12 +57,12 @@ export default function Home() {
               justifyContent: 'space-around',
             }}
           >
+            <div>
+              <h1 style={{ width: '20hv' }}>tasks</h1>
+            </div>
             {(localUser?.permissions === 'write' ||
               localUser?.permissions === 'admin') && (
               <>
-                <div>
-                  <h1 style={{ width: '20hv' }}>tasks</h1>
-                </div>
                 <div
                   style={{
                     display: 'flex',
